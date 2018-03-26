@@ -18,11 +18,26 @@ use Illuminate\Http\Request;
 });*/
 
 
-$api = app('Dingo/App/Routing/Router');
+//$api = app('Dingo/App/Routing/Router');
+//
+//$api -> version( 'v1' , function ($api ){
+//
+//    $api->group(['middleware' => 'cors'] , function ($api){
+//
+//    });
+//});
 
-$api -> version( 'v1' , function ($api ){
+$api = app('Dingo\Api\Routing\Router');
 
-    $api->group(['middleware' => 'cors'] , function ($api){
+$api->version('v1', function ($api) {
+    $api->group(['middleware' => 'cors'], function ($api) {
+
+        $api->post('login', 'App\Http\Controllers\AuthenticationController@login');
+        $api->post('signup', 'App\Http\Controllers\AuthenticationController@signup');
+
+        $api->resource('users', 'App\Http\Controllers\UserController');
+        $api->get('users/paginanted/{page}', 'App\Http\Controllers\UserController@paginated')
+            ->name('users.paginated');
 
     });
 });
