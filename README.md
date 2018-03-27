@@ -1,32 +1,50 @@
-# ng2laraveljwtcris
+# API Backend Laravel5 frontend Angular2
 
 
-### añadir a composer.json
-      "barryvdh/laravel-cors": "^0.11.0",
-      "tymon/jwt-auth": "0.5.*",
-      "dingo/api": "2.0.0-alpha1"
+## Composer
+  Añadir a composer.json
+
+    "barryvdh/laravel-cors": "^0.11.0",
+    "tymon/jwt-auth": "0.5.*",
+    "dingo/api": "2.0.0-alpha1"
       
-### ejecutar composer update
+  Ejecutar `composer update`
         
 ## jwt-auth
 
-  https://github.com/tymondesigns/jwt-auth/wiki
+[Documentation](https://github.com/tymondesigns/jwt-auth/wiki)
   
-** en config/app
+  
+#### Configuración de Providers 
+     
+ app/config/app.php  
+ 
+ `providers[]` Application Service Providers...
 
-  Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class, // colocar antes de AppServiceProvider
-  App\Providers\AppServiceProvider::class,
+    Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class, // colocar antes de AppServiceProvider
+    App\Providers\AppServiceProvider::class,
 
-** modificar el comando de generar pasword de jwt 
+ `aliases[]` 
+    
+    'JWTAuth' => Tymon\JWTAuth\Facades\JWTAuth::class,
+    'JWTFactory' => Tymon\JWTAuth\Facades\JWTFactory::class
 
-en /Users/cristina/Sites/ng2laraveljwtcris/app-laravel5/vendor/tymon/jwt-auth/src/Commands/JWTGenerateCommand.php
+#### Modificar el comando de generar pasword de jwt 
+
+   app/vendor/tymon/jwt-auth/src/Commands/JWTGenerateCommand.php
 
     /**
      * 
      * Añadir esta funcion para que funcione el comando php artisan jwt:generate.
      * 
      */
+     
     public function handle() {
         $this->fire();
     }
-    
+
+## Laravel CORS 
+   [Documentation](https://github.com/barryvdh/laravel-cors)
+   
+## Dingo API
+   [Documentation](https://github.com/dingo/api/wiki)
